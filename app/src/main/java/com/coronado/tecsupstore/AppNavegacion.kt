@@ -155,6 +155,7 @@ fun ContenidoPantalla(
         "inicio" -> {
 
             InicioScreen(
+                favoritos = favoritos,
                 onAgregarFavorito = onAgregarFavorito,
                 modifier = modifier
             )
@@ -196,6 +197,7 @@ fun ContenidoPantalla(
 
 @Composable
 fun InicioScreen(
+    favoritos: Set<String>,
     onAgregarFavorito: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -213,18 +215,21 @@ fun InicioScreen(
         TarjetaProducto(
             nombre = "Audífonos",
             precio = "89.00",
+            esFavorito = favoritos.contains("Audífonos"),
             onFavoritoClick = { onAgregarFavorito("Audífonos") }
         )
 
         TarjetaProducto(
             nombre = "Smartwatch",
             precio = "199.00",
+            esFavorito = favoritos.contains("Smartwatch"),
             onFavoritoClick = { onAgregarFavorito("Smartwatch") }
         )
 
         TarjetaProducto(
             nombre = "Funda celular",
             precio = "25.00",
+            esFavorito = favoritos.contains("Funda celular"),
             onFavoritoClick = { onAgregarFavorito("Funda celular") }
         )
     }

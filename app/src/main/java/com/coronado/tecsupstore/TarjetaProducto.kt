@@ -1,5 +1,6 @@
 package com.coronado.tecsupstore
 
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Flag
 import androidx.compose.material.icons.filled.Share
@@ -41,6 +42,7 @@ private val FondoTarjeta = Color(0xFFF2EFF5)
 fun TarjetaProducto(
     nombre: String,
     precio: String,
+    esFavorito: Boolean,
     onFavoritoClick: () -> Unit
 ) {
 
@@ -142,12 +144,12 @@ fun TarjetaProducto(
             DropdownMenuItem(
 
                 text = {
-                    Text("Favoritos")
+                    Text(if (esFavorito) "En favoritos" else "Favoritos")
                 },
 
                 leadingIcon = {
                     Icon(
-                        imageVector = Icons.Default.FavoriteBorder,
+                        imageVector = if (esFavorito) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                         contentDescription = null,
                         tint = Morado
                     )
