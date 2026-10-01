@@ -36,6 +36,7 @@ private val MoradoClaro = Color(0xFFEDE7F6)
 @Composable
 fun AppDrawer(
     currentRoute: String,
+    favoritosCount: Int,
     onNavigate: (String) -> Unit
 ) {
 
@@ -174,7 +175,20 @@ fun AppDrawer(
         NavigationDrawerItem(
 
             label = {
-                Text("Favoritos")
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text("Favoritos")
+                    if (favoritosCount > 0) {
+                        Text(
+                            text = favoritosCount.toString(),
+                            fontWeight = FontWeight.Bold,
+                            color = Morado
+                        )
+                    }
+                }
             },
 
             selected = currentRoute == "favoritos",

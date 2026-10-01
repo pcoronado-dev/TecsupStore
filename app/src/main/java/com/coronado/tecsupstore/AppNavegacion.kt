@@ -64,6 +64,7 @@ fun AppNavegacion() {
 
             AppDrawer(
                 currentRoute = currentRoute,
+                favoritosCount = favoritos.size,
 
                 onNavigate = { route ->
 
