@@ -1,5 +1,9 @@
 package com.coronado.tecsupstore
 
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.Flag
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -113,27 +117,61 @@ fun TarjetaProducto(
                 ) {
 
                     DropdownMenuItem(
+
                         text = {
                             Text("Favoritos")
                         },
+
+                        leadingIcon = {
+
+                            Icon(
+                                imageVector = Icons.Default.FavoriteBorder,
+                                contentDescription = null
+                            )
+                        },
+
                         onClick = {
                             expanded = false
                         }
                     )
 
+                    HorizontalDivider()
+
                     DropdownMenuItem(
+
                         text = {
                             Text("Compartir")
                         },
+
+                        leadingIcon = {
+
+                            Icon(
+                                imageVector = Icons.Default.Share,
+                                contentDescription = null
+                            )
+                        },
+
                         onClick = {
                             expanded = false
                         }
                     )
 
+                    HorizontalDivider()
+
                     DropdownMenuItem(
+
                         text = {
                             Text("Reportar")
                         },
+
+                        leadingIcon = {
+
+                            Icon(
+                                imageVector = Icons.Default.Flag,
+                                contentDescription = null
+                            )
+                        },
+
                         onClick = {
                             expanded = false
                         }
