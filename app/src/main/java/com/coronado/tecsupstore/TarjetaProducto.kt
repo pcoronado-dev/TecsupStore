@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.ShoppingBag
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
@@ -32,6 +33,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
+private val Morado = Color(0xFF673AB7)
+private val MoradoClaro = Color(0xFFEDE7F6)
+private val FondoTarjeta = Color(0xFFF2EFF5)
+
 @Composable
 fun TarjetaProducto(
     nombre: String,
@@ -42,61 +47,74 @@ fun TarjetaProducto(
         mutableStateOf(false)
     }
 
-    Card(
+    Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 6.dp),
-
-        shape = RoundedCornerShape(16.dp),
-
-        colors = CardDefaults.cardColors(
-            containerColor = Color(0xFFF3EFF8)
-        )
+            .padding(
+                horizontal = 16.dp,
+                vertical = 6.dp
+            )
     ) {
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(12.dp),
-
-            verticalAlignment = Alignment.CenterVertically
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(16.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = FondoTarjeta
+            )
         ) {
 
-            Box(
+            Row(
                 modifier = Modifier
-                    .size(52.dp)
-                    .background(
-                        color = Color(0xFFEDE7F6),
-                        shape = RoundedCornerShape(12.dp)
-                    ),
-                contentAlignment = Alignment.Center
+                    .fillMaxWidth()
+                    .padding(10.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
 
-                Text(
-                    text = "🛍️"
+                // Icono del producto
+                Box(
+                    modifier = Modifier
+                        .size(52.dp)
+                        .background(
+                            color = MoradoClaro,
+                            shape = RoundedCornerShape(12.dp)
+                        ),
+                    contentAlignment = Alignment.Center
+                ) {
+
+                    Icon(
+                        imageVector = Icons.Default.ShoppingBag,
+                        contentDescription = null,
+                        tint = Morado,
+                        modifier = Modifier.size(28.dp)
+                    )
+                }
+
+                Spacer(
+                    modifier = Modifier.size(12.dp)
                 )
-            }
 
-            Spacer(
-                modifier = Modifier.size(12.dp)
-            )
+                // Nombre y precio
+                Column(
+                    modifier = Modifier.weight(1f)
+                ) {
 
-            Column(
-                modifier = Modifier.weight(1f)
-            ) {
+                    Text(
+                        text = nombre,
+                        color = Color(0xFF29252D)
+                    )
 
-                Text(
-                    text = nombre
-                )
+                    Spacer(
+                        modifier = Modifier.size(2.dp)
+                    )
 
-                Text(
-                    text = "S/ $precio",
-                    color = Color(0xFF673AB7)
-                )
-            }
+                    Text(
+                        text = "S/ $precio",
+                        color = Morado
+                    )
+                }
 
-            Box {
-
+                // Botón de tres puntos
                 IconButton(
                     onClick = {
                         expanded = true
@@ -105,79 +123,81 @@ fun TarjetaProducto(
 
                     Icon(
                         imageVector = Icons.Default.MoreVert,
-                        contentDescription = "Más opciones"
-                    )
-                }
-
-                DropdownMenu(
-                    expanded = expanded,
-                    onDismissRequest = {
-                        expanded = false
-                    }
-                ) {
-
-                    DropdownMenuItem(
-
-                        text = {
-                            Text("Favoritos")
-                        },
-
-                        leadingIcon = {
-
-                            Icon(
-                                imageVector = Icons.Default.FavoriteBorder,
-                                contentDescription = null
-                            )
-                        },
-
-                        onClick = {
-                            expanded = false
-                        }
-                    )
-
-                    HorizontalDivider()
-
-                    DropdownMenuItem(
-
-                        text = {
-                            Text("Compartir")
-                        },
-
-                        leadingIcon = {
-
-                            Icon(
-                                imageVector = Icons.Default.Share,
-                                contentDescription = null
-                            )
-                        },
-
-                        onClick = {
-                            expanded = false
-                        }
-                    )
-
-                    HorizontalDivider()
-
-                    DropdownMenuItem(
-
-                        text = {
-                            Text("Reportar")
-                        },
-
-                        leadingIcon = {
-
-                            Icon(
-                                imageVector = Icons.Default.Flag,
-                                contentDescription = null
-                            )
-                        },
-
-                        onClick = {
-                            expanded = false
-                        }
+                        contentDescription = "Más opciones",
+                        tint = Color(0xFF555158)
                     )
                 }
             }
+        }
+
+        // Menú contextual
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = {
+                expanded = false
+            }
+        ) {
+
+            DropdownMenuItem(
+
+                text = {
+                    Text("Favoritos")
+                },
+
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.FavoriteBorder,
+                        contentDescription = null,
+                        tint = Morado
+                    )
+                },
+
+                onClick = {
+                    expanded = false
+                }
+            )
+
+            HorizontalDivider()
+
+            DropdownMenuItem(
+
+                text = {
+                    Text("Compartir")
+                },
+
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Share,
+                        contentDescription = null,
+                        tint = Morado
+                    )
+                },
+
+                onClick = {
+                    expanded = false
+                }
+            )
+
+            HorizontalDivider()
+
+            DropdownMenuItem(
+
+                text = {
+                    Text("Reportar")
+                },
+
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Flag,
+                        contentDescription = null,
+                        tint = Morado
+                    )
+                },
+
+                onClick = {
+                    expanded = false
+                }
+            )
         }
     }
 }

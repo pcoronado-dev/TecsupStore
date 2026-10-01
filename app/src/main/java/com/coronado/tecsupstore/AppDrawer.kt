@@ -2,8 +2,8 @@ package com.coronado.tecsupstore
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -20,6 +20,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.NavigationDrawerItem
+import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,55 +30,78 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
+private val Morado = Color(0xFF673AB7)
+private val MoradoClaro = Color(0xFFEDE7F6)
+
 @Composable
 fun AppDrawer(
     currentRoute: String,
     onNavigate: (String) -> Unit
 ) {
 
-    ModalDrawerSheet {
+    ModalDrawerSheet(
+        drawerContainerColor = Color.White
+    ) {
 
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(20.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .padding(
+                    horizontal = 20.dp,
+                    vertical = 24.dp
+                )
         ) {
 
-            Box(
-                modifier = Modifier
-                    .size(64.dp)
-                    .clip(CircleShape)
-                    .background(Color(0xFFEDE7F6)),
-                contentAlignment = Alignment.Center
+            Row(
+                verticalAlignment = Alignment.CenterVertically
             ) {
 
-                Text(
-                    text = "MR",
-                    color = Color(0xFF673AB7),
-                    fontWeight = FontWeight.Bold
+                Row(
+                    modifier = Modifier
+                        .size(50.dp)
+                        .clip(CircleShape)
+                        .background(MoradoClaro),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+
+                    Text(
+                        text = "MR",
+                        color = Morado,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+
+                Spacer(
+                    modifier = Modifier.size(14.dp)
                 )
+
+                Column {
+
+                    Text(
+                        text = "Maria Rojas",
+                        fontWeight = FontWeight.Bold,
+                        color = Color(0xFF28242B)
+                    )
+
+                    Spacer(
+                        modifier = Modifier.height(2.dp)
+                    )
+
+                    Text(
+                        text = "maria@tecsup.edu.pe",
+                        color = Color.Gray
+                    )
+                }
             }
-
-            Spacer(
-                modifier = Modifier.height(10.dp)
-            )
-
-            Text(
-                text = "Piero Coronado",
-                fontWeight = FontWeight.Bold
-            )
-
-            Text(
-                text = "piero.coronado@tecsup.edu.pe",
-                color = Color.Gray
-            )
         }
 
-        HorizontalDivider()
+        HorizontalDivider(
+            modifier = Modifier.padding(horizontal = 20.dp)
+        )
 
         Spacer(
-            modifier = Modifier.height(12.dp)
+            modifier = Modifier.height(16.dp)
         )
 
         NavigationDrawerItem(
@@ -93,20 +117,34 @@ fun AppDrawer(
             },
 
             icon = {
-
                 Icon(
                     imageVector = Icons.Default.Home,
                     contentDescription = null
                 )
             },
 
-            modifier = Modifier.padding(horizontal = 12.dp)
+            colors = NavigationDrawerItemDefaults.colors(
+                selectedContainerColor = MoradoClaro,
+                selectedIconColor = Morado,
+                selectedTextColor = Morado
+            ),
+
+            modifier = Modifier.padding(
+                horizontal = 12.dp
+            )
         )
 
         NavigationDrawerItem(
 
             label = {
-                Text("Mis pedidos")
+                Text(
+                    text = "Mis pedidos",
+                    fontWeight =
+                        if (currentRoute == "pedidos")
+                            FontWeight.Bold
+                        else
+                            FontWeight.Normal
+                )
             },
 
             selected = currentRoute == "pedidos",
@@ -116,14 +154,21 @@ fun AppDrawer(
             },
 
             icon = {
-
                 Icon(
                     imageVector = Icons.Default.ShoppingBag,
                     contentDescription = null
                 )
             },
 
-            modifier = Modifier.padding(horizontal = 12.dp)
+            colors = NavigationDrawerItemDefaults.colors(
+                selectedContainerColor = MoradoClaro,
+                selectedIconColor = Morado,
+                selectedTextColor = Morado
+            ),
+
+            modifier = Modifier.padding(
+                horizontal = 12.dp
+            )
         )
 
         NavigationDrawerItem(
@@ -139,14 +184,21 @@ fun AppDrawer(
             },
 
             icon = {
-
                 Icon(
                     imageVector = Icons.Default.FavoriteBorder,
                     contentDescription = null
                 )
             },
 
-            modifier = Modifier.padding(horizontal = 12.dp)
+            colors = NavigationDrawerItemDefaults.colors(
+                selectedContainerColor = MoradoClaro,
+                selectedIconColor = Morado,
+                selectedTextColor = Morado
+            ),
+
+            modifier = Modifier.padding(
+                horizontal = 12.dp
+            )
         )
 
         NavigationDrawerItem(
@@ -162,14 +214,33 @@ fun AppDrawer(
             },
 
             icon = {
-
                 Icon(
                     imageVector = Icons.Default.Person,
                     contentDescription = null
                 )
             },
 
-            modifier = Modifier.padding(horizontal = 12.dp)
+            colors = NavigationDrawerItemDefaults.colors(
+                selectedContainerColor = MoradoClaro,
+                selectedIconColor = Morado,
+                selectedTextColor = Morado
+            ),
+
+            modifier = Modifier.padding(
+                horizontal = 12.dp
+            )
+        )
+
+        Spacer(
+            modifier = Modifier.height(8.dp)
+        )
+
+        HorizontalDivider(
+            modifier = Modifier.padding(horizontal = 20.dp)
+        )
+
+        Spacer(
+            modifier = Modifier.height(8.dp)
         )
 
         NavigationDrawerItem(
@@ -185,14 +256,15 @@ fun AppDrawer(
             },
 
             icon = {
-
                 Icon(
                     imageVector = Icons.Default.Logout,
                     contentDescription = null
                 )
             },
 
-            modifier = Modifier.padding(horizontal = 12.dp)
+            modifier = Modifier.padding(
+                horizontal = 12.dp
+            )
         )
     }
 }
