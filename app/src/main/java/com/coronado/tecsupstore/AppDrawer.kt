@@ -64,12 +64,12 @@ fun AppDrawer(
             )
 
             Text(
-                text = "Maria Rojas",
+                text = "Piero Coronado",
                 fontWeight = FontWeight.Bold
             )
 
             Text(
-                text = "maria@tecsup.edu.pe",
+                text = "piero.coronado@tecsup.edu.pe",
                 color = Color.Gray
             )
         }
