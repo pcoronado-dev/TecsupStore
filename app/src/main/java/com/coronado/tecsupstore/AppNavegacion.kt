@@ -46,6 +46,16 @@ fun AppNavegacion() {
         mutableStateOf("inicio")
     }
 
+    var favoritos by remember {
+        mutableStateOf(setOf<String>())
+    }
+
+    val agregarFavorito: (String) -> Unit = { producto ->
+        if (!favoritos.contains(producto)) {
+            favoritos = favoritos + producto
+        }
+    }
+
     ModalNavigationDrawer(
 
         drawerState = drawerState,
@@ -123,6 +133,8 @@ fun AppNavegacion() {
 
             ContenidoPantalla(
                 route = currentRoute,
+                favoritos = favoritos,
+                onAgregarFavorito = agregarFavorito,
                 modifier = Modifier.padding(paddingValues)
             )
         }
@@ -132,6 +144,8 @@ fun AppNavegacion() {
 @Composable
 fun ContenidoPantalla(
     route: String,
+    favoritos: Set<String>,
+    onAgregarFavorito: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -140,6 +154,7 @@ fun ContenidoPantalla(
         "inicio" -> {
 
             InicioScreen(
+                onAgregarFavorito = onAgregarFavorito,
                 modifier = modifier
             )
         }
@@ -180,6 +195,7 @@ fun ContenidoPantalla(
 
 @Composable
 fun InicioScreen(
+    onAgregarFavorito: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -195,17 +211,20 @@ fun InicioScreen(
 
         TarjetaProducto(
             nombre = "Audífonos",
-            precio = "89.00"
+            precio = "89.00",
+            onFavoritoClick = { onAgregarFavorito("Audífonos") }
         )
 
         TarjetaProducto(
             nombre = "Smartwatch",
-            precio = "199.00"
+            precio = "199.00",
+            onFavoritoClick = { onAgregarFavorito("Smartwatch") }
         )
 
         TarjetaProducto(
             nombre = "Funda celular",
-            precio = "25.00"
+            precio = "25.00",
+            onFavoritoClick = { onAgregarFavorito("Funda celular") }
         )
     }
 }

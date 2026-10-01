@@ -40,7 +40,8 @@ private val FondoTarjeta = Color(0xFFF2EFF5)
 @Composable
 fun TarjetaProducto(
     nombre: String,
-    precio: String
+    precio: String,
+    onFavoritoClick: () -> Unit
 ) {
 
     var expanded by remember {
@@ -154,6 +155,7 @@ fun TarjetaProducto(
 
                 onClick = {
                     expanded = false
+                    onFavoritoClick()
                 }
             )
 
